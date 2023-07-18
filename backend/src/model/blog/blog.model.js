@@ -8,3 +8,6 @@ const blogSchema = mongoose.Schema({
     likedBy: [ { type: mongoose.Schema.Types.ObjectId, ref:"user" } ],
     comments: [  ]
 })
+
+const Blog = mongoose.model("blog",blogSchema);
+module.exports = Blog;  
