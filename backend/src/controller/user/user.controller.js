@@ -2,11 +2,12 @@ const express = require("express");
 // Model Imports 
 const {User, Blog} = require("../../model/index");
 // Middleware Imports 
-const { validatEmail } = require("../../middlewares/index");
+const validatEmail = require("../../middlewares/index");
 
 const app = express.Router();
 
-app.post("/", validatEmail,  async (req, res) => {
+
+app.post("/", validatEmail, async (req, res) => {
     try {
         
         if(!req.body.email || !req.body.name || !req.body.age) return res.status("400").send("Please Enter Valid Details..");
