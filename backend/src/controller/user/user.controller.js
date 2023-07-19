@@ -25,13 +25,14 @@ app.post("/", validatEmail, async (req, res) => {
     }
 })
 
-app.get("/user-details",validatEmail,  async(req, res)=>{
+app.get("/user-details/:email", async(req, res)=>{
     try{
-        const userDetails = User.findOne({ "email": req?.body?.email });
+        console.log(req?.params?.email,"email")
+        const userDetails = User.findOne({ "email": req?.params?.email });
         if(userDetails){
-            return res.status(200).send("User details:", userDetails);
+            return res.status(200).send("User details:"+userDetails);
         }else {
-            return res.send(404).send("User Not found please sign up")
+            return res.status(404).send("User Not found please sign up")
         }
     }catch(error){
         return res.status(400).send("Error is:", error);
