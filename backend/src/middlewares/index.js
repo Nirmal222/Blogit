@@ -1,3 +1,3 @@
 const validateEmail = require("./emailValidator/email.validator");
 
-module.exports = { validateEmail, }
+module.exports = validateEmail
