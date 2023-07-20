@@ -16,7 +16,8 @@ app.post("/", validatEmail, async (req, res) => {
         if (user.length) {
             return res.status(404).send("User Already Exist")
         } else {
-            let newUser = User.create(req?.body);
+            
+            let newUser = await User.create(req?.body);
             return res.status(200).send("User Created Succesfully, User Details:" + newUser);
         }
     }catch(error){
@@ -27,7 +28,6 @@ app.post("/", validatEmail, async (req, res) => {
 
 app.get("/user-details/:email", async(req, res)=>{
     try{
-        console.log(req?.params?.email,"email")
         const userDetails = User.findOne({ "email": req?.params?.email });
         if(userDetails){
             return res.status(200).send("User details:"+userDetails);
