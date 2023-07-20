@@ -31,7 +31,7 @@ app.get("/user-details/:email", async(req, res)=>{
         const userDetails = User.findOne({ "email": req?.params?.email });
         if(userDetails){
             return res.status(200).send("User details:"+userDetails);
-        }else {
+        }else { 
             return res.status(404).send("User Not found please sign up")
         }
     }catch(error){
