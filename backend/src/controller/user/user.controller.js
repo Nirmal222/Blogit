@@ -4,8 +4,9 @@ const { User, Blog, Otp } = require("../../model/index");
 // Middleware Imports 
 const validatEmail = require("../../middlewares/index");
 // utility imports 
-const { transporter } = require("../../utils");
-
+const { transporter, generateOTP } = require("../../utils");
+// dotenv 
+require('dotenv').config();
 const app = express.Router();
 
 
