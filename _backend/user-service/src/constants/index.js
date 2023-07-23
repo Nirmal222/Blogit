@@ -1,3 +1,3 @@
-const { user } = require("./user.routes/user.routes");
+const { user, signup, login } = require("./user.routes/user.routes");
 const { home } = require("./home.routes/home.routes");
-module.exports = { home, user }
+module.exports = { home, user, signup, login }
