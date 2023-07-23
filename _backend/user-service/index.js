@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(home,async (req,res)=>{
-    res.send("The Server is Up and Running")
+    // res.render("index")
 })
 
 // User Router 
