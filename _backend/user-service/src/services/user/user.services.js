@@ -20,7 +20,10 @@ const usersignup = async (req, res)=>{
         const hashPassword = await  bcrypt.hash(user.password, salt);
         user.password = hashPassword;
         const newUser = await user.save();
-        res.redirect(   )
+        res.send({
+            message: "User Created Successfullt",
+            userDetails: newUser,
+        })
     }catch(err){
         console.log("Error is:", err);
         res.send()
