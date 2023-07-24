@@ -1,3 +1,3 @@
-const usersignup = require("./user/user.services");
+const {usersignup, userlogin} = require("./user/user.services");
 
-module.exports = { usersignup, }
+module.exports = { usersignup, userlogin }

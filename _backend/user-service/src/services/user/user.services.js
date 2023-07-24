@@ -3,8 +3,8 @@ const { UserModel, } = require("../../models/index");
 // required modules
 const crypto = require("crypto")
 const bcrypt = require("bcrypt");
-// required routes 
-
+// required utilities
+const { createToken } = require("../../utils/index");
 
 const usersignup = async (req, res)=>{
     try{
@@ -30,4 +30,24 @@ const usersignup = async (req, res)=>{
     }
 }
 
-module.exports = usersignup;
+const userlogin = async (req, res)=>{
+    try{
+        const { email, password } = req.body;
+        const findUser = await UserModel.findOne({email: email});
+        if(findUser){
+            const match = await bcrypt.compare(password, findUser.password);
+            const token = createToken(findUser?.id);
+            res.cookie("access-token", token);
+            if(match) res.status(200).send({
+                message: "user logged in successfully",
+                token: token,
+            })
+        }
+    }catch(err){
+        console.log("Error is:",err);
+        return res.status(404).send("Authentication Error");
+    }
+}
+
+
+module.exports = { usersignup, userlogin };
