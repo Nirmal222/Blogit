@@ -1,3 +1,3 @@
-const { createToken } = require("./jwt/jwt");
+const { createToken, transporter } = require("./jwt/jwt");
 
-module.exports = { createToken };
+module.exports = { createToken, transporter };
