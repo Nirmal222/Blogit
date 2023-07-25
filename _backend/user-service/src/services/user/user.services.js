@@ -4,7 +4,8 @@ const { UserModel, } = require("../../models/index");
 const crypto = require("crypto")
 const bcrypt = require("bcrypt");
 // required utilities
-const { createToken } = require("../../utils/index");
+const { createToken, transporter } = require("../../utils/index");
+const { createMailOptions } = require("../../constants");
 
 const usersignup = async (req, res)=>{
     try{
@@ -20,6 +21,15 @@ const usersignup = async (req, res)=>{
         const hashPassword = await  bcrypt.hash(user.password, salt);
         user.password = hashPassword;
         const newUser = await user.save();
+
+        //send verification mail to user
+        transporter.sendMail(createMailOptions("nirmalkumargurajada@gmail.com", "Hey this is your verification mail"), function(error,info){
+            if(error){
+                console.log(error)
+            }else{
+                console.log("Verifications email is sent to your gmail account.")
+            }
+        })
         res.send({
             message: "User Created Successfullt",
             userDetails: newUser,
