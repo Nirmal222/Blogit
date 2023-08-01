@@ -1,5 +1,5 @@
 const user = "/user";
 const signup = "/signup"
 const login = "/login"
-
-module.exports = { user, signup, login }
+const logout = "/logout"
+module.exports = { user, signup, login, logout };
