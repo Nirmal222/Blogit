@@ -59,5 +59,22 @@ const userlogin = async (req, res)=>{
     }
 }
 
+const userlogout = async (req,res)=>{
+    // Assuming you are using JWT as a cookie named 'access-token'
+    const token = req.cookies['access-token'];
+  
+    if (!token) {
+      return res.status(401).json({ message: 'No token found.' });
+    }
+  
+    // Add the token to the blacklist (you would typically store this in a database)
+    // You can use a more sophisticated mechanism like Redis for better performance
+    // Here, we are using an array as a simple example:
+    // blacklistedTokens.push(token);
+  
+    // For demonstration purposes, we're just sending a success response here
+    res.json({ message: 'Logged out successfully.' });
+}
+ 
 
-module.exports = { usersignup, userlogin };
+module.exports = { usersignup, userlogin, userlogout };
