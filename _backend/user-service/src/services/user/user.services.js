@@ -23,7 +23,7 @@ const usersignup = async (req, res)=>{
         const newUser = await user.save();
 
         //send verification mail to user
-        transporter.sendMail(createMailOptions("nirmalkumargurajada@gmail.com", "Hey this is your verification mail"), function(error,info){
+        transporter.sendMail(createMailOptions("gurajadanirmalkumar@gmail.com", "Hey this is your verification mail"), function(error,info){
             if(error){
                 console.log(error)
             }else{
