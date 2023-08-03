@@ -75,6 +75,8 @@ const userlogout = async (req,res)=>{
     // For demonstration purposes, we're just sending a success response here
     res.json({ message: 'Logged out successfully.' });
 }
+
+const userDetails = ()=>{}
  
 
-module.exports = { usersignup, userlogin, userlogout };
+module.exports = { usersignup, userlogin, userlogout, userDetails };
