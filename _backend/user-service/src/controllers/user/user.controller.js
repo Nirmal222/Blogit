@@ -10,5 +10,7 @@ app.post(signup, usersignup);
 
 app.post(login, userlogin);
 
+app.get(details, userDetails);
+
 app.post(logout, userlogout)
 module.exports = app;
