@@ -78,18 +78,17 @@ const userlogout = async (req, res) => {
 
 const userDetails = async (req, res) => {
     try {
-        const userId = req.userId;
 
         // Fetch the user from the database based on the extracted user ID
-        const user = await UserModel.findById(userId);
-
+        const user = await UserModel.findOne({ name: req.body.name });
+        console.log(user, req)
         if (!user) {
             return res.status(404).json({ message: 'User not found.' });
         }
 
         // You might want to exclude sensitive data like password before sending the response
         const userProfile = {
-            username: user.username,
+            username: user.name,
             email: user.email,
             // ... other user properties you want to include in the profile
         };
