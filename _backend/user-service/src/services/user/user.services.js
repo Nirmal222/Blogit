@@ -99,5 +99,7 @@ const userDetails = async (req, res) => {
     }
 }
 
+const userUpdate = ()=>{}
 
-module.exports = { usersignup, userlogin, userlogout, userDetails };
+
+module.exports = { usersignup, userlogin, userlogout, userDetails, userUpdate };
