@@ -99,7 +99,15 @@ const userDetails = async (req, res) => {
     }
 }
 
-const userUpdate = ()=>{}
+const userUpdate = async (req, res)=>{
+    try{
+        const username = req?.body?.name;
+        const updatedUser = await UserModel.update({ name:username}, { $set: { email: req.body.newMail } } )
+        return res.status(200).json({ message: "Updated User Sucessfully", user: updatedUser })
+    }catch(err){
+        res.status(400).send("Sorry could not perform operation")
+    }
+}
 
 
 module.exports = { usersignup, userlogin, userlogout, userDetails, userUpdate };
