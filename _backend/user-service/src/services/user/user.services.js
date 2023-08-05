@@ -23,13 +23,13 @@ const usersignup = async (req, res) => {
         const newUser = await user.save();
 
         //send verification mail to user
-        transporter.sendMail(createMailOptions("gurajadanirmalkumar@gmail.com", "Hey this is your verification mail"), function (error, info) {
-            if (error) {
-                console.log(error)
-            } else {
-                console.log("Verifications email is sent to your gmail account.")
-            }
-        })
+        // transporter.sendMail(createMailOptions("gurajadanirmalkumar@gmail.com", "Hey this is your verification mail"), function (error, info) {
+        //     if (error) {
+        //         console.log(error)
+        //     } else {
+        //         console.log("Verifications email is sent to your gmail account.")
+        //     }
+        // })
         res.send({
             message: "User Created Successfullt",
             userDetails: newUser,
@@ -44,14 +44,19 @@ const userlogin = async (req, res) => {
     try {
         const { email, password } = req.body;
         const findUser = await UserModel.findOne({ email: email });
+        console.log(findUser, "finUser")
         if (findUser) {
             const match = await bcrypt.compare(password, findUser.password);
             const token = createToken(findUser?.id);
-            res.cookie("access-token", token);
-            if (match) res.status(200).send({
-                message: "user logged in successfully",
-                token: token,
-            })
+            // res.cookie("access-token", token);
+            if (match) {
+                res.status(200).send({
+                    message: "user logged in successfully",
+                    token: token,
+                })
+            }else {
+                res.status(401).send({ message: "User Credentials Wrong" });
+            }
         }
     } catch (err) {
         console.log("Error is:", err);
@@ -99,12 +104,12 @@ const userDetails = async (req, res) => {
     }
 }
 
-const userUpdate = async (req, res)=>{
-    try{
+const userUpdate = async (req, res) => {
+    try {
         const username = req?.body?.name;
-        const updatedUser = await UserModel.update({ name:username}, { $set: { email: req.body.newMail } } )
+        const updatedUser = await UserModel.update({ name: username }, { $set: { email: req.body.newMail } })
         return res.status(200).json({ message: "Updated User Sucessfully", user: updatedUser })
-    }catch(err){
+    } catch (err) {
         res.status(400).send("Sorry could not perform operation")
     }
 }
