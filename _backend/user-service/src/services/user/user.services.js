@@ -4,7 +4,7 @@ const { UserModel, } = require("../../models/index");
 const crypto = require("crypto")
 const bcrypt = require("bcrypt");
 // required utilities
-const { createToken, transporter } = require("../../utils/index");
+const { createToken, transporter, verifyToken } = require("../../utils/index");
 const { createMailOptions } = require("../../constants");
 
 const usersignup = async (req, res) => {
@@ -67,6 +67,9 @@ const userlogin = async (req, res) => {
 const userlogout = async (req, res) => {
     // Assuming you are using JWT as a cookie named 'access-token'
     const token = req.cookies['access-token'];
+    console.log(token)
+    const verify = verifyToken(token);
+    console.log(verify);
 
     if (!token) {
         return res.status(401).json({ message: 'No token found.' });
